@@ -1,4 +1,6 @@
-**/Debug
-**/Generated Files
+**/Debug/
+**/Generated Files/
 *.opensdf
 *.sdf
+**/.vs/
+**/ipch/
