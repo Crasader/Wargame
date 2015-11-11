@@ -34,10 +34,13 @@
     <ClCompile Include="..\..\Classes\HelloWorldScene.cpp">
       <Filter>Classes</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Classes\MapGenerator.cpp">
+    <ClCompile Include="..\..\Classes\MapScene.cpp">
       <Filter>Classes</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Classes\MapScene.cpp">
+    <ClCompile Include="..\..\Classes\MapModel.cpp">
+      <Filter>Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Classes\RandomMapModel.cpp">
       <Filter>Classes</Filter>
     </ClCompile>
   </ItemGroup>
@@ -57,10 +60,13 @@
     <ClInclude Include="..\..\Classes\HelloWorldScene.h">
       <Filter>Classes</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Classes\MapGenerator.h">
+    <ClInclude Include="..\..\Classes\MapScene.h">
       <Filter>Classes</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Classes\MapScene.h">
+    <ClInclude Include="..\..\Classes\MapModel.h">
+      <Filter>Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Classes\RandomMapModel.h">
       <Filter>Classes</Filter>
     </ClInclude>
   </ItemGroup>

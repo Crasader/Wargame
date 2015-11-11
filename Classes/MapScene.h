@@ -3,6 +3,9 @@
 #include "cocos2d.h"
 
 class MapScene : public cocos2d::Layer {
+private:
+	void onKeyReleased(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event * event);
+
 public:
 	// there's no 'id' in cpp, so we recommend returning the class instance pointer
 	static cocos2d::Scene* createScene();

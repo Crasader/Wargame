@@ -216,7 +216,6 @@
   <ItemGroup>
     <ClInclude Include="..\..\Classes\AppDelegate.h" />
     <ClInclude Include="..\..\Classes\HelloWorldScene.h" />
-    <ClInclude Include="..\..\Classes\MapGenerator.h" />
     <ClInclude Include="..\..\Classes\MapScene.h" />
     <ClInclude Include="App.xaml.h">
       <DependentUpon>App.xaml</DependentUpon>
@@ -226,7 +225,9 @@
     <ClInclude Include="Cocos2dEngine\OpenGLESPage.xaml.h">
       <DependentUpon>Cocos2dEngine\OpenGLESPage.xaml</DependentUpon>
     </ClInclude>
+    <ClInclude Include="..\..\Classes\MapModel.h" />
     <ClInclude Include="pch.h" />
+    <ClInclude Include="..\..\Classes\RandomMapModel.h" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -242,7 +243,6 @@
   <ItemGroup>
     <ClCompile Include="..\..\Classes\AppDelegate.cpp" />
     <ClCompile Include="..\..\Classes\HelloWorldScene.cpp" />
-    <ClCompile Include="..\..\Classes\MapGenerator.cpp" />
     <ClCompile Include="..\..\Classes\MapScene.cpp" />
     <ClCompile Include="App.xaml.cpp">
       <DependentUpon>App.xaml</DependentUpon>
@@ -252,6 +252,7 @@
     <ClCompile Include="Cocos2dEngine\OpenGLESPage.xaml.cpp">
       <DependentUpon>Cocos2dEngine\OpenGLESPage.xaml</DependentUpon>
     </ClCompile>
+    <ClCompile Include="..\..\Classes\MapModel.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
@@ -260,6 +261,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="..\..\Classes\RandomMapModel.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Page Include="Cocos2dEngine\OpenGLESPage.xaml" />
