@@ -5,19 +5,23 @@
 class MapModel
 {
 public:
-	static const int width = 100;
-	static const int height = 60;
-
-	enum cell_type { LAND, COAST, SEA };
+	enum CellType { LAND, COAST, SEA };
 	
-	MapModel();
+	MapModel() : MapModel(100, 60) {}
+	MapModel(int width, int height);
 	~MapModel();
 
-	cell_type getCellTypeAt(int x, int y);
+	cocos2d::Node * getView();
+	CellType getCellTypeAt(int x, int y);
 	
 protected:
-	static const int cell_adj[][2];
+	static const int cellAdj[][2];
 
-	cell_type ** map;
+	cocos2d::Node * view;
+	CellType ** cells;
+	int width;
+	int height;
+
+	void init(int width, int height);
 	bool inBounds(int x, int y);
 };

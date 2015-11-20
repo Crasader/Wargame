@@ -215,6 +215,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Classes\AppDelegate.h" />
+    <ClInclude Include="..\..\Classes\TMXMapModel.h" />
     <ClInclude Include="..\..\Classes\HelloWorldScene.h" />
     <ClInclude Include="..\..\Classes\MapScene.h" />
     <ClInclude Include="App.xaml.h">
@@ -244,6 +245,7 @@
     <ClCompile Include="..\..\Classes\AppDelegate.cpp" />
     <ClCompile Include="..\..\Classes\HelloWorldScene.cpp" />
     <ClCompile Include="..\..\Classes\MapScene.cpp" />
+    <ClCompile Include="..\..\Classes\TMXMapModel.cpp" />
     <ClCompile Include="App.xaml.cpp">
       <DependentUpon>App.xaml</DependentUpon>
     </ClCompile>

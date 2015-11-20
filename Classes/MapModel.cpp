@@ -1,6 +1,6 @@
 #include "MapModel.h"
 
-const int MapModel::cell_adj[][2] = {
+const int MapModel::cellAdj[][2] = {
 	{ 0, -1 },
 	{ 1, -1 },
 	{ 1, 0 },
@@ -11,31 +11,49 @@ const int MapModel::cell_adj[][2] = {
 	{ -1, -1 }
 };
 
-MapModel::MapModel()
+MapModel::MapModel(int width, int height)
 {
-	map = new cell_type*[height];
-
-	for (int y = 0; y < height; y++)
-	{
-		map[y] = new cell_type[width];
-
-		for (int x = 0; x < width; x++)
-		{
-			map[y][x] = cell_type::SEA;
-		}
-	}
+	this->init(width, height);
 }
 
 MapModel::~MapModel()
 {
+	delete view;
+	for (int y = 0; y < this->height; y++)
+	{
+		delete[] cells[y];
+	}
+	delete[] cells;
 }
 
-MapModel::cell_type MapModel::getCellTypeAt(int x, int y)
+cocos2d::Node * MapModel::getView()
 {
-	return map[y][x];
+	return this->view;
+}
+
+MapModel::CellType MapModel::getCellTypeAt(int x, int y)
+{
+	return cells[y][x];
+}
+
+void MapModel::init(int width, int height)
+{
+	this->width = width;
+	this->height = height;
+	this->cells = new CellType*[this->height];
+
+	for (int y = 0; y < this->height; y++)
+	{
+		this->cells[y] = new CellType[this->width];
+
+		for (int x = 0; x < width; x++)
+		{
+			this->cells[y][x] = CellType::SEA;
+		}
+	}
 }
 
 bool MapModel::inBounds(int x, int y)
 {
-	return (x >= 0 && x < width && y >= 0 && y < height);
+	return (x >= 0 && x < this->width && y >= 0 && y < this->height);
 }
