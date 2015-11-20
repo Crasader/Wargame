@@ -43,6 +43,8 @@
     <ClCompile Include="..\..\Classes\RandomMapModel.cpp">
       <Filter>Classes</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Classes\PlayerModule.cpp" />
+    <ClCompile Include="..\..\Classes\Player.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.xaml.h" />
@@ -69,6 +71,8 @@
     <ClInclude Include="..\..\Classes\RandomMapModel.h">
       <Filter>Classes</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Classes\Player.h" />
+    <ClInclude Include="..\..\Classes\PlayerModule.h" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest" />

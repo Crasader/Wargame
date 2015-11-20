@@ -50,6 +50,7 @@ bool HelloWorld::init()
 
     /////////////////////////////
     // 3. add your codes below...
+	playermodule = PlayerModule(3);
 
     // add a label shows "Hello World"
     // create and initialize a label
