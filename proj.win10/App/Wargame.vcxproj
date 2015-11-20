@@ -217,8 +217,6 @@
     <ClInclude Include="..\..\Classes\AppDelegate.h" />
     <ClInclude Include="..\..\Classes\HelloWorldScene.h" />
     <ClInclude Include="..\..\Classes\MapScene.h" />
-    <ClInclude Include="..\..\Classes\Player.h" />
-    <ClInclude Include="..\..\Classes\PlayerModule.h" />
     <ClInclude Include="App.xaml.h">
       <DependentUpon>App.xaml</DependentUpon>
     </ClInclude>
@@ -246,8 +244,6 @@
     <ClCompile Include="..\..\Classes\AppDelegate.cpp" />
     <ClCompile Include="..\..\Classes\HelloWorldScene.cpp" />
     <ClCompile Include="..\..\Classes\MapScene.cpp" />
-    <ClCompile Include="..\..\Classes\Player.cpp" />
-    <ClCompile Include="..\..\Classes\PlayerModule.cpp" />
     <ClCompile Include="App.xaml.cpp">
       <DependentUpon>App.xaml</DependentUpon>
     </ClCompile>
