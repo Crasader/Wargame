@@ -20,6 +20,9 @@ Scene* MapScene::createScene()
 
 bool MapScene::init()
 {
+	this->qDown = 0;  this->wDown = 0; this->eDown = 0; 
+	this->aDown = 0;  this->sDown = 0; this->dDown = 0;
+
 	//////////////////////////////
 	// 1. super init first
 	if (!Layer::init())
@@ -31,6 +34,7 @@ bool MapScene::init()
 	Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
 	auto map_view = TMXTiledMap::create("sea.tmx");
+	this->mapRef = map_view;
 
 	RandomMapModel map_model(20, 80, 80);
 	auto layer = map_view->getLayer("Layer0");
@@ -69,16 +73,70 @@ bool MapScene::init()
 	listener->onKeyReleased = CC_CALLBACK_2(MapScene::onKeyReleased, this);
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
 	
+	this->scheduleUpdate();
 	return true;
 }
 
 void MapScene::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)
 {
-	log("Key with keycode %d released", keyCode);
-
-	auto tgt = (MapScene *)(event->getCurrentTarget());
-	auto map = (TMXTiledMap *)(tgt->getChildByName("map"));
-	auto layer = map->getLayer("Layer0");
-	auto tile = layer->getTileAt(Vec2(0, 0));
-	tile->setOpacity(0);
+	switch (keyCode)
+	{
+		case EventKeyboard::KeyCode::KEY_W:
+			wDown = 0;
+			break;
+		case EventKeyboard::KeyCode::KEY_S:
+			sDown = 0;
+			break;
+		case EventKeyboard::KeyCode::KEY_A:
+			aDown = 0;
+			break;
+		case EventKeyboard::KeyCode::KEY_D:
+			dDown = 0;
+			break;
+		case EventKeyboard::KeyCode::KEY_Q:
+			qDown = 0;
+			break;
+		case EventKeyboard::KeyCode::KEY_E:
+			eDown = 0;
+			break;
+	}
 }
+
+void MapScene::onKeyPressed(EventKeyboard::KeyCode keyCode, Event * event)
+{
+	switch (keyCode)
+	{
+		case EventKeyboard::KeyCode::KEY_W:
+			wDown = 1;
+			break;
+		case EventKeyboard::KeyCode::KEY_S:
+			sDown = 1;
+			break;
+		case EventKeyboard::KeyCode::KEY_A:
+			aDown = 1;
+			break;
+		case EventKeyboard::KeyCode::KEY_D:
+			dDown = 1;
+			break;
+		case EventKeyboard::KeyCode::KEY_Q:
+			qDown = 1;
+			break;
+		case EventKeyboard::KeyCode::KEY_E:
+			eDown = 1;
+			break;
+	}
+}
+
+void MapScene::update(float delta)
+{
+	float dX = (dDown * -1.0) + (aDown * 1.0);
+	float dY = (wDown * -1.0) + (sDown * 1.0);
+	float dScale = (qDown * -0.005) + (eDown * 0.005);
+
+	Vec2 newPos(mapRef->getPositionX() + dX, mapRef->getPositionY() + dY);
+
+	this->mapRef->setScale(mapRef->getScale() + dScale);
+	this->mapRef->setPosition(newPos);
+}
+
+
