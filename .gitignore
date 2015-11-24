@@ -4,3 +4,4 @@
 *.sdf
 **/.vs/
 **/ipch/
+*.vcxproj.user
