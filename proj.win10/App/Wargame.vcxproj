@@ -247,12 +247,9 @@
     <ClCompile Include="..\..\Classes\AppDelegate.cpp" />
     <ClCompile Include="..\..\Classes\HelloWorldScene.cpp" />
     <ClCompile Include="..\..\Classes\MapScene.cpp" />
-<<<<<<< HEAD
     <ClCompile Include="..\..\Classes\Player.cpp" />
     <ClCompile Include="..\..\Classes\PlayerModule.cpp" />
-=======
     <ClCompile Include="..\..\Classes\TMXMapModel.cpp" />
->>>>>>> origin/master
     <ClCompile Include="App.xaml.cpp">
       <DependentUpon>App.xaml</DependentUpon>
     </ClCompile>
