@@ -1,6 +1,7 @@
 #pragma once
 
 #include "cocos2d.h"
+#include "TMXMapModel.h"
 
 class MapScene : public cocos2d::Layer 
 {
@@ -11,7 +12,8 @@ class MapScene : public cocos2d::Layer
 		void update(float delta);
 
 		int wDown, sDown, aDown, dDown, qDown, eDown;
-		cocos2d::TMXTiledMap * mapRef;
+		cocos2d::Node * mapView;
+		TMXMapModel * mapModel;
 
 	public:
 

@@ -33,40 +33,14 @@ bool MapScene::init()
 	Size visibleSize = Director::getInstance()->getVisibleSize();
 	Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
-	auto map_view = TMXTiledMap::create("sea.tmx");
-	this->mapRef = map_view;
+	this->mapModel = new TMXMapModel("base100x60.tmx");
+	this->mapView = this->mapModel->getView();
 
-	RandomMapModel map_model(20, 80, 80);
-	auto layer = map_view->getLayer("Layer0");
+	this->mapView->setScale(0.30);
+	this->mapView->setAnchorPoint(Vec2(0.5, 0.5));
+	this->mapView->setPosition(Vec2(visibleSize.width / 2 + origin.x - this->mapView->getPositionX(), visibleSize.height / 2 + origin.y - this->mapView->getPositionY()));
 
-	for (int y = 0; y < 60; y++)
-	{
-		for (int x = 0; x < 100; x++)
-		{
-			int gid;
-
-			switch (map_model.getCellTypeAt(x, y))
-			{
-			case MapModel::cell_type::COAST:
-				gid = 1;
-				break;
-			case MapModel::cell_type::LAND:
-				gid = 8;
-				break;
-			default:
-				gid = 11;
-				break;
-			}
-
-			layer->setTileGID(gid, Vec2(x, y));
-		}
-	}
-
-	map_view->setScale(0.30);
-	map_view->setAnchorPoint(Vec2(0.5, 0.5));
-	map_view->setPosition(Vec2(visibleSize.width / 2 + origin.x - map_view->getPositionX(), visibleSize.height / 2 + origin.y - map_view->getPositionY()));
-
-	this->addChild(map_view, 0, "map");
+	this->addChild(this->mapView, 0, "map");
 
 	auto listener = EventListenerKeyboard::create();
 	listener->onKeyPressed = CC_CALLBACK_2(MapScene::onKeyPressed, this);
@@ -133,10 +107,10 @@ void MapScene::update(float delta)
 	float dY = (wDown * -1.0) + (sDown * 1.0);
 	float dScale = (qDown * -0.005) + (eDown * 0.005);
 
-	Vec2 newPos(mapRef->getPositionX() + dX, mapRef->getPositionY() + dY);
+	Vec2 newPos(this->mapView->getPositionX() + dX, this->mapView->getPositionY() + dY);
 
-	this->mapRef->setScale(mapRef->getScale() + dScale);
-	this->mapRef->setPosition(newPos);
+	this->mapView->setScale(mapView->getScale() + dScale);
+	this->mapView->setPosition(newPos);
 }
 
 
