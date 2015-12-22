@@ -48,6 +48,8 @@ bool MapScene::init()
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
 	
 	this->scheduleUpdate();
+	playerModule = new PlayerModule(3);
+
 	return true;
 }
 
@@ -97,6 +99,11 @@ void MapScene::onKeyPressed(EventKeyboard::KeyCode keyCode, Event * event)
 			break;
 		case EventKeyboard::KeyCode::KEY_E:
 			eDown = 1;
+			break;
+		case EventKeyboard::KeyCode::KEY_T:
+			(*playerModule).nextTurn();
+			CCLog("switching player");
+			//TODO add some HUD this tutorial might help http://www.raywenderlich.com/4666/how-to-create-a-hud-layer-with-cocos2d
 			break;
 	}
 }

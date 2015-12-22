@@ -2,6 +2,7 @@
 
 #include "cocos2d.h"
 #include "TMXMapModel.h"
+#include "PlayerModule.h"
 
 class MapScene : public cocos2d::Layer 
 {
@@ -14,6 +15,7 @@ class MapScene : public cocos2d::Layer
 		int wDown, sDown, aDown, dDown, qDown, eDown;
 		cocos2d::Node * mapView;
 		TMXMapModel * mapModel;
+		PlayerModule * playerModule;
 
 	public:
 
