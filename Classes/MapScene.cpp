@@ -1,4 +1,5 @@
 #include "MapScene.h"
+#include "HUDScene.h"
 #include "RandomMapModel.h"
 
 USING_NS_CC;
@@ -10,9 +11,11 @@ Scene* MapScene::createScene()
 
 	// 'layer' is an autorelease object
 	auto layer = MapScene::create();
+	auto hud = HUDScene::createLayer();
 
 	// add layer as a child to scene
-	scene->addChild(layer);
+	scene->addChild(layer, 0);
+	scene->addChild(hud, 2);
 
 	// return the scene
 	return scene;
@@ -103,7 +106,6 @@ void MapScene::onKeyPressed(EventKeyboard::KeyCode keyCode, Event * event)
 		case EventKeyboard::KeyCode::KEY_T:
 			(*playerModule).nextTurn();
 			CCLog("switching player");
-			//TODO add some HUD this tutorial might help http://www.raywenderlich.com/4666/how-to-create-a-hud-layer-with-cocos2d
 			break;
 	}
 }
