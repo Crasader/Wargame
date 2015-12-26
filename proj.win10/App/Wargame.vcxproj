@@ -215,6 +215,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Classes\AppDelegate.h" />
+    <ClInclude Include="..\..\Classes\HUDScene.h" />
     <ClInclude Include="..\..\Classes\TMXMapModel.h" />
     <ClInclude Include="..\..\Classes\HelloWorldScene.h" />
     <ClInclude Include="..\..\Classes\MapScene.h" />
@@ -246,6 +247,7 @@
   <ItemGroup>
     <ClCompile Include="..\..\Classes\AppDelegate.cpp" />
     <ClCompile Include="..\..\Classes\HelloWorldScene.cpp" />
+    <ClCompile Include="..\..\Classes\HUDScene.cpp" />
     <ClCompile Include="..\..\Classes\MapScene.cpp" />
     <ClCompile Include="..\..\Classes\Player.cpp" />
     <ClCompile Include="..\..\Classes\PlayerModule.cpp" />

@@ -3,9 +3,9 @@ HUDScene::HUDScene() {}
 
 HUDScene::~HUDScene() {}
 
-HUDScene* HUDScene::createLayer()
+cocos2d::Layer* HUDScene::createLayer()
 {
-	_message = "The enemy is approaching!";
+	const std::string _message = "The enemy is approaching!";
 	HUDScene* a = new HUDScene();
 	a->create();
 	a->setColor(cocos2d::Color3B(0, 0, 0));
@@ -16,17 +16,18 @@ HUDScene* HUDScene::createLayer()
 	a->initOptions(_message);
 
 	return a;
-}*/
+}
 
 void HUDScene::initOptions(const std::string& _message)
 {
-	_messageLabel = cocos2d::LabelBMFont::create(_message.c_str(), "Marker Felt Small.fnt");
+	_messageLabel = cocos2d::CCLabelTTF::create(_message.c_str(), "Marker Felt", 12,
+		cocos2d::CCSizeMake(245, 32), cocos2d::kCCTextAlignmentCenter);
 	_messageLabel->setColor(cocos2d::Color3B(255, 215, 0));
 
 	addChild(_messageLabel, 1);
 
-	_messageLabel->setPosition(cocos2d::Vec2(Director::getInstance()->getVisibleSize().width,
-		Director::getInstance()->getVisibleSize().height));
+	_messageLabel->setPosition(cocos2d::Vec2(cocos2d::Director::getInstance()->getVisibleSize().width,
+		cocos2d::Director::getInstance()->getVisibleSize().height));
 
 
 }

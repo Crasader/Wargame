@@ -15,7 +15,7 @@ Scene* MapScene::createScene()
 
 	// add layer as a child to scene
 	scene->addChild(layer, 0);
-	scene->addChild(hud, 2);
+	scene->addChild(hud, 1);
 
 	// return the scene
 	return scene;

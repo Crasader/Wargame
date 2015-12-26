@@ -14,8 +14,8 @@ public:
 	virtual void draw(cocos2d::Renderer * renderer, const cocos2d::Mat4 & transform,
 		bool transformUpdated);
 
-	inline virtual cocos2d::LabelBMFont* getMessageLabel() { return _messageLabel; }; 
+	inline virtual cocos2d::CCLabelTTF* getMessageLabel() { return _messageLabel; };
 
 private:
-	cocos2d::LabelBMFont* _messageLabel;
+	cocos2d::CCLabelTTF* _messageLabel;
 }; 
