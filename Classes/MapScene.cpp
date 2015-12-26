@@ -42,6 +42,39 @@ bool MapScene::init()
 
 	this->addChild(this->mapView, 0, "map");
 
+	auto tmxGround = ((TMXTiledMap *)(this->mapView))->getLayer("Layer0");
+	
+
+	auto touchListener = EventListenerTouchOneByOne::create();
+	touchListener->setSwallowTouches(true);
+
+	touchListener->onTouchBegan = [&](Touch* touch, Event* event)
+	{
+		auto tgt = (TMXTiledMap *)(event->getCurrentTarget());
+		auto ground = tgt->getLayer("Layer0");
+		auto mapDim = ground->getLayerSize();
+		auto mapBox = ground->getBoundingBox();
+		auto location = tgt->convertTouchToNodeSpace(touch);
+
+		if (mapBox.containsPoint(location))
+		{
+			float width = mapBox.getMaxX() - mapBox.getMinX();
+			float height = mapBox.getMaxY() - mapBox.getMinY();
+
+			float relX = location.x - mapBox.getMinX();
+			float relY = location.y - mapBox.getMinY();
+
+			int tileX = relX * (mapDim.width / width);
+			int tileY = mapDim.height - (relY * (mapDim.height / height));
+
+			ground->getTileAt(Vec2(tileX, tileY))->setOpacity(0);
+		}
+
+		return true;
+	};
+
+	_eventDispatcher->addEventListenerWithSceneGraphPriority(touchListener, this->mapView);
+
 	auto listener = EventListenerKeyboard::create();
 	listener->onKeyPressed = CC_CALLBACK_2(MapScene::onKeyPressed, this);
 	listener->onKeyReleased = CC_CALLBACK_2(MapScene::onKeyReleased, this);

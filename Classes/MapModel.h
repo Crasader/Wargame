@@ -17,7 +17,7 @@ public:
 protected:
 	static const int cellAdj[][2];
 
-	cocos2d::Node * view;
+	cocos2d::TMXTiledMap * tmxView;
 	CellType ** cells;
 	int width;
 	int height;
