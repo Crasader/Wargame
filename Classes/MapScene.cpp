@@ -42,8 +42,12 @@ bool MapScene::init()
 
 	this->addChild(this->mapView, 0, "map");
 
+	auto selectSprite = Sprite::create("select.png");
+	selectSprite->setAnchorPoint(Vec2(0, 0));
+	selectSprite->setOpacity(0);
+	this->mapView->addChild(selectSprite, 10, "select");
+
 	auto tmxGround = ((TMXTiledMap *)(this->mapView))->getLayer("Layer0");
-	
 
 	auto touchListener = EventListenerTouchOneByOne::create();
 	touchListener->setSwallowTouches(true);
@@ -55,6 +59,7 @@ bool MapScene::init()
 		auto mapDim = ground->getLayerSize();
 		auto mapBox = ground->getBoundingBox();
 		auto location = tgt->convertTouchToNodeSpace(touch);
+		auto selectSprite = tgt->getChildByName("select");
 
 		if (mapBox.containsPoint(location))
 		{
@@ -67,7 +72,13 @@ bool MapScene::init()
 			int tileX = relX * (mapDim.width / width);
 			int tileY = mapDim.height - (relY * (mapDim.height / height));
 
-			ground->getTileAt(Vec2(tileX, tileY))->setOpacity(0);
+			auto tile = ground->getTileAt(Vec2(tileX, tileY));
+			selectSprite->setPosition(tile->getPosition());
+			selectSprite->setOpacity(0xff);
+		}
+		else
+		{
+			selectSprite->setOpacity(0);
 		}
 
 		return true;
