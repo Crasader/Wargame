@@ -11,7 +11,7 @@ Scene* MapScene::createScene()
 
 	// 'layer' is an autorelease object
 	auto layer = MapScene::create();
-	auto hud = HUDScene::createLayer();
+	auto hud = HUDScene::create();
 
 	// add layer as a child to scene
 	scene->addChild(layer, 0);

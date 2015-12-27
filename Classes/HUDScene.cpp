@@ -1,36 +1,34 @@
 #include "HUDScene.h"
-HUDScene::HUDScene() {}
+USING_NS_CC;
 
-HUDScene::~HUDScene() {}
-
-cocos2d::Layer* HUDScene::createLayer()
+Scene* HUDScene::createScene()
 {
 	const std::string _message = "The enemy is approaching!";
-	HUDScene* a = new HUDScene();
-	a->create();
-	a->setColor(cocos2d::Color3B(0, 0, 0));
+	Scene* a = new Scene();
+	
+	auto hud = HUDScene::create();
 
-	a->setContentSize(cocos2d::Size::Size(1, 1));
-	a->setAnchorPoint(cocos2d::Vec2(0, 0));
-
-	a->initOptions(_message);
+	a->addChild(hud);
 
 	return a;
 }
 
-void HUDScene::initOptions(const std::string& _message)
+bool HUDScene::init()
 {
-	_messageLabel = cocos2d::CCLabelTTF::create(_message.c_str(), "Marker Felt", 12,
-		cocos2d::CCSizeMake(245, 32), cocos2d::kCCTextAlignmentCenter);
-	_messageLabel->setColor(cocos2d::Color3B(255, 215, 0));
+	//call superconstructor
+	if (!Layer::init())
+	{
+		return false;
+	}
+	//creating a simple message label to be positioned at the center
+	_messageLabel = CCLabelTTF::create("Hello World", "Marker Felt", 12,
+		CCSizeMake(245, 32), kCCTextAlignmentCenter);
+	_messageLabel->setColor(Color3B(255, 215, 0));
 
 	addChild(_messageLabel, 1);
 
-	_messageLabel->setPosition(cocos2d::Vec2(cocos2d::Director::getInstance()->getVisibleSize().width,
-		cocos2d::Director::getInstance()->getVisibleSize().height));
-
+	_messageLabel->setPosition(Vec2(Director::getInstance()->getVisibleSize().width,
+		Director::getInstance()->getVisibleSize().height));
+	return true;
 
 }
-
-void HUDScene::draw(cocos2d::Renderer * renderer, const cocos2d::Mat4 & transform,
-	bool transformUpdated) {}

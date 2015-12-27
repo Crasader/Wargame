@@ -7,8 +7,8 @@
 class PlayerModule
 {
 	public:
-		/*constructor defaults to the classic three players
-		Will do the following:
+		/*
+		Constructor will do the following:
 		1)give each player its starting city,
 		2)give one starting Infantry unit located on its starting city
 		3)bookkeeping

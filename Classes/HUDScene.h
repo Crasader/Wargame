@@ -5,16 +5,13 @@
 class HUDScene : public cocos2d::Layer
 {
 public:
-	HUDScene();
-	~HUDScene();
 
-	static cocos2d::Layer* createLayer();
-	void initOptions(const std::string& _message);
+	static cocos2d::Scene* createScene();
+	virtual bool init();
 
-	virtual void draw(cocos2d::Renderer * renderer, const cocos2d::Mat4 & transform,
-		bool transformUpdated);
+	CREATE_FUNC(HUDScene);
 
-	inline virtual cocos2d::CCLabelTTF* getMessageLabel() { return _messageLabel; };
+	inline cocos2d::CCLabelTTF* getMessageLabel() { return _messageLabel; };
 
 private:
 	cocos2d::CCLabelTTF* _messageLabel;
