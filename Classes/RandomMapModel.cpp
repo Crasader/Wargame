@@ -20,8 +20,8 @@ RandomMapModel::RandomMapModel(int n_islands, int area_min, int area_max) : MapM
 
 	while (deburr()) {}
 
-	this->view = cocos2d::TMXTiledMap::create("base100x60.tmx");
-	auto layer = ((cocos2d::TMXTiledMap *)(this->view))->getLayer("Layer0");
+	this->tmxView = cocos2d::TMXTiledMap::create("base100x60.tmx");
+	auto layer = ((cocos2d::TMXTiledMap *)(this->tmxView))->getLayer("Layer0");
 
 	for (int y = 0; y < 60; y++)
 	{

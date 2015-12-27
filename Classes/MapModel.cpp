@@ -18,7 +18,7 @@ MapModel::MapModel(int width, int height)
 
 MapModel::~MapModel()
 {
-	delete view;
+	delete tmxView;
 	for (int y = 0; y < this->height; y++)
 	{
 		delete[] cells[y];
@@ -28,7 +28,7 @@ MapModel::~MapModel()
 
 cocos2d::Node * MapModel::getView()
 {
-	return this->view;
+	return this->tmxView;
 }
 
 MapModel::CellType MapModel::getCellTypeAt(int x, int y)
