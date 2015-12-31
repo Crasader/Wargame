@@ -8,6 +8,7 @@ public:
 
 	static cocos2d::Scene* createScene();
 	virtual bool init();
+	void changeLabel(std::string m);
 
 	CREATE_FUNC(HUDScene);
 

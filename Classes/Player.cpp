@@ -3,5 +3,16 @@
 
 Player::Player()
 {
-//nothing to see here for now
+	id = "Doofus";
+	//hey there's something!
+}
+
+Player::Player(std::string id)
+{
+	this->id = id;
+}
+
+std::string Player::getID()
+{
+	return this->id;
 }

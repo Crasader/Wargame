@@ -3,7 +3,6 @@ USING_NS_CC;
 
 Scene* HUDScene::createScene()
 {
-	const std::string _message = "The enemy is approaching!";
 	Scene* a = new Scene();
 	
 	auto hud = HUDScene::create();
@@ -29,6 +28,13 @@ bool HUDScene::init()
 
 	_messageLabel->setPosition(Vec2(Director::getInstance()->getVisibleSize().width,
 		Director::getInstance()->getVisibleSize().height));
+
+
 	return true;
 
+}
+
+void HUDScene::changeLabel(std::string m)
+{
+	_messageLabel->setString(m);
 }

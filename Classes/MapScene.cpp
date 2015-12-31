@@ -11,11 +11,11 @@ Scene* MapScene::createScene()
 
 	// 'layer' is an autorelease object
 	auto layer = MapScene::create();
-	auto hud = HUDScene::create();
+	
 
 	// add layer as a child to scene
 	scene->addChild(layer, 0);
-	scene->addChild(hud, 1);
+	scene->addChild(layer->_hud);
 
 	// return the scene
 	return scene;
@@ -32,25 +32,26 @@ bool MapScene::init()
 	{
 		return false;
 	}
+	this->_hud = HUDScene::create();
 
 	Size visibleSize = Director::getInstance()->getVisibleSize();
 	Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
 	this->mapModel = new TMXMapModel("base100x60.tmx");
-	this->mapView = this->mapModel->getView();
+	this->_mapView = this->mapModel->getView();
 
-	this->mapView->setScale(0.30);
-	this->mapView->setAnchorPoint(Vec2(0.5, 0.5));
-	this->mapView->setPosition(Vec2(visibleSize.width / 2 + origin.x - this->mapView->getPositionX(), visibleSize.height / 2 + origin.y - this->mapView->getPositionY()));
+	this->_mapView->setScale(0.30);
+	this->_mapView->setAnchorPoint(Vec2(0.5, 0.5));
+	this->_mapView->setPosition(Vec2(visibleSize.width / 2 + origin.x - this->_mapView->getPositionX(), visibleSize.height / 2 + origin.y - this->_mapView->getPositionY()));
 
-	this->addChild(this->mapView, 0, "map");
+	this->addChild(this->_mapView, 0, "map");
 
 	auto selectSprite = Sprite::create("select.png");
 	selectSprite->setAnchorPoint(Vec2(0, 0));
 	selectSprite->setOpacity(0);
-	this->mapView->addChild(selectSprite, 10, "select");
+	this->_mapView->addChild(selectSprite, 10, "select");
 
-	auto tmxGround = ((TMXTiledMap *)(this->mapView))->getLayer("Layer0");
+	auto tmxGround = ((TMXTiledMap *)(this->_mapView))->getLayer("Layer0");
 
 	auto touchListener = EventListenerTouchOneByOne::create();
 	touchListener->setSwallowTouches(true);
@@ -87,7 +88,7 @@ bool MapScene::init()
 		return true;
 	};
 
-	_eventDispatcher->addEventListenerWithSceneGraphPriority(touchListener, this->mapView);
+	_eventDispatcher->addEventListenerWithSceneGraphPriority(touchListener, this->_mapView);
 
 	auto listener = EventListenerKeyboard::create();
 	listener->onKeyPressed = CC_CALLBACK_2(MapScene::onKeyPressed, this);
@@ -105,6 +106,7 @@ void MapScene::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)
 	switch (keyCode)
 	{
 		case EventKeyboard::KeyCode::KEY_W:
+			//_hud->changeLabel("Stopped Moving up");
 			wDown = 0;
 			break;
 		case EventKeyboard::KeyCode::KEY_S:
@@ -130,6 +132,7 @@ void MapScene::onKeyPressed(EventKeyboard::KeyCode keyCode, Event * event)
 	switch (keyCode)
 	{
 		case EventKeyboard::KeyCode::KEY_W:
+			//_hud->changeLabel("Moving up");
 			wDown = 1;
 			break;
 		case EventKeyboard::KeyCode::KEY_S:
@@ -148,8 +151,7 @@ void MapScene::onKeyPressed(EventKeyboard::KeyCode keyCode, Event * event)
 			eDown = 1;
 			break;
 		case EventKeyboard::KeyCode::KEY_T:
-			(*playerModule).nextTurn();
-			CCLog("switching player");
+			nextTurn();
 			break;
 	}
 }
@@ -160,10 +162,22 @@ void MapScene::update(float delta)
 	float dY = (wDown * -1.0) + (sDown * 1.0);
 	float dScale = (qDown * -0.005) + (eDown * 0.005);
 
-	Vec2 newPos(this->mapView->getPositionX() + dX, this->mapView->getPositionY() + dY);
+	Vec2 newPos(this->_mapView->getPositionX() + dX, this->_mapView->getPositionY() + dY);
 
-	this->mapView->setScale(mapView->getScale() + dScale);
-	this->mapView->setPosition(newPos);
+	this->_mapView->setScale(_mapView->getScale() + dScale);
+	this->_mapView->setPosition(newPos);
+}
+
+void MapScene::nextTurn()
+{
+	playerModule->nextTurn();
+	const char * id = playerModule->getCurrentPlayerID();
+	char message[100];
+	//with some math, pray that a player doesn't name himself with more than 78 characters (I hate constants)
+	//we should make a limit on the size of character names when asked, something reasonable
+	std::sprintf(message, "%s is now current player", id);
+	CCLog(message);
+	_hud->changeLabel(message);
 }
 
 

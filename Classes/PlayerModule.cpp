@@ -11,11 +11,12 @@ PlayerModule::PlayerModule(int num_players)
 		*it = new Player();
 	}
 
-	//set up starting cities, and initialize starting unit
+	//set up starting cities, and initialize starting unit (infantry)
 }
 
-/*@TODO : we will have a unique map for each Player, and each player will have permissions for distinct units,
+/*@TODO : we will have a unique fog of war map for each Player, and each player will have permissions for distinct units,
 which will be handled by this Module
+http://gamemechanicexplorer.com/ has a pseudocode idea for creating such a fog of war
 */
 
 PlayerModule::~PlayerModule()
@@ -37,7 +38,11 @@ void PlayerModule::nextTurn()
 Player * PlayerModule::getCurrentPlayer()
 {
 	return *curr_player;
+}
 
+const char * PlayerModule::getCurrentPlayerID()
+{
+	return (*curr_player)->getID().c_str();
 }
 
 

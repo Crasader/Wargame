@@ -1,6 +1,7 @@
 #pragma once
 
 #include "cocos2d.h"
+#include "HUDScene.h"
 #include "TMXMapModel.h"
 #include "PlayerModule.h"
 
@@ -12,8 +13,11 @@ class MapScene : public cocos2d::Layer
 		void onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event * event);
 		void update(float delta);
 
+		void nextTurn();
+
 		int wDown, sDown, aDown, dDown, qDown, eDown;
-		cocos2d::Node * mapView;
+		cocos2d::Node * _mapView;
+		HUDScene * _hud;
 		TMXMapModel * mapModel;
 		PlayerModule * playerModule;
 

@@ -27,6 +27,9 @@ class PlayerModule
 		/*returns a pointer to the current player*/
 		Player * getCurrentPlayer();
 
+		/*returns the name of the current player*/
+		const char * getCurrentPlayerID();
+
 		/*given a specific unit, will show intel on it if it belongs to another player,
 		or will allow unit to be acted upon if it belongs to current player
 		this function will probably be handled better in the HelloWorldScene.cpp
@@ -35,7 +38,7 @@ class PlayerModule
 	private:
 		std::list<Player *> playerList;
 
-		std::list<Player *>::iterator curr_player;//to be updated appropriately
+		std::list<Player *>::iterator curr_player;
 		//considering making a map of all units on board, so user can select another player's visible unit
 
 };

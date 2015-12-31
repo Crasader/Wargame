@@ -7,11 +7,14 @@ class Player
 {
 	public:
 		Player();
+		Player(std::string id);
 
 		//Player(Color c) so we can customize
+		std::string getID();
 		
 
 	private:
+		std::string id;
 		//list of units
 		//list of owned cities
 		//player color and other metadata
