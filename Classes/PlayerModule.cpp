@@ -27,9 +27,8 @@ PlayerModule::~PlayerModule()
 void PlayerModule::nextTurn()
 {
 	//for all units, set them to full turns excluding planes
-	if (curr_player != playerList.end())
-		curr_player++;
-	else
+	curr_player++;
+	if(curr_player == playerList.end())
 		curr_player = playerList.begin();
 	
 	

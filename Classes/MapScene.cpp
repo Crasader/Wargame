@@ -4,18 +4,19 @@
 
 USING_NS_CC;
 
-Scene* MapScene::createScene()
+Scene* MapScene::createScene(int numplayers)
 {
 	// 'scene' is an autorelease object
 	auto scene = Scene::create();
 
 	// 'layer' is an autorelease object
 	auto layer = MapScene::create();
-	
+	//create PlayerModule after init()
+	layer->playerModule = new PlayerModule(numplayers);
 
 	// add layer as a child to scene
 	scene->addChild(layer, 0);
-	scene->addChild(layer->_hud);
+
 
 	// return the scene
 	return scene;
@@ -32,15 +33,15 @@ bool MapScene::init()
 	{
 		return false;
 	}
-	this->_hud = HUDScene::create();
 
 	Size visibleSize = Director::getInstance()->getVisibleSize();
+	//TODO: we are using this in all the Scenes, so make this into some sort of inline, DRY principle
 	Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
 	this->mapModel = new TMXMapModel("base100x60.tmx");
 	this->_mapView = this->mapModel->getView();
 
-	this->_mapView->setScale(0.30);
+	this->_mapView->setScale(0.30f);
 	this->_mapView->setAnchorPoint(Vec2(0.5, 0.5));
 	this->_mapView->setPosition(Vec2(visibleSize.width / 2 + origin.x - this->_mapView->getPositionX(), visibleSize.height / 2 + origin.y - this->_mapView->getPositionY()));
 
@@ -94,9 +95,11 @@ bool MapScene::init()
 	listener->onKeyPressed = CC_CALLBACK_2(MapScene::onKeyPressed, this);
 	listener->onKeyReleased = CC_CALLBACK_2(MapScene::onKeyReleased, this);
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
+
+	_hud = HUDScene::create();
+	this->addChild(_hud, 1, "hud");
 	
 	this->scheduleUpdate();
-	playerModule = new PlayerModule(3);
 
 	return true;
 }
