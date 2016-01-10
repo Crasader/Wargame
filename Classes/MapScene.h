@@ -20,6 +20,7 @@ class MapScene : public cocos2d::Layer
 		HUDScene * _hud;
 		TMXMapModel * mapModel;
 		PlayerModule * playerModule;
+		int movementSpeed;
 
 	public:
 

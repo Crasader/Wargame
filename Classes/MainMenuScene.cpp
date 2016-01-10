@@ -51,7 +51,7 @@ bool MainMenuScene::init()
 		"startButtonSelected.png",
 		CC_CALLBACK_1(MainMenuScene::startGame, this));
 
-	startItem->setPosition(Vec2(startItem->getContentSize().width / 2,startItem->getContentSize().height));
+	startItem->setPosition(Vec2(startItem->getContentSize().width,startItem->getContentSize().height));
 
 	MenuItems.pushBack(closeItem);
 	MenuItems.pushBack(startItem);
@@ -68,20 +68,20 @@ bool MainMenuScene::init()
 	_editPlayers->setFontName("fonts/arial.ttf");
 	_editPlayers->setFontSize(12);
 	_editPlayers->setFontColor(Color3B::RED);
-	_editPlayers->setPlaceHolder("# of Players");
+	_editPlayers->setText("# of Players");
 	_editPlayers->setPlaceholderFontColor(Color3B::WHITE);
-	_editPlayers->setMaxLength(8);
+	//_editPlayers->setInputMode(ui::EditBox::InputMode::NUMERIC);
+	_editPlayers->setMaxLength(3);
 	_editPlayers->setReturnType(ui::EditBox::KeyboardReturnType::DONE);
 	this->addChild(this->_editPlayers);
-
-	setNumPlayersToDefault();
+	_editPlayers->setDelegate(this);
 
 	/////////////////////////////
 	// 3. add your codes below...
 
 	// create and initialize a label
 
-	auto label = Label::createWithTTF("Press P or click Go! to begin", "fonts/Marker Felt.ttf", 24);
+	auto label = Label::createWithTTF("Press P or click Start to begin", "fonts/Marker Felt.ttf", 24);
 
 	// position the label on the center of the screen
 	label->setPosition(Vec2(origin.x + visibleSize.width / 2,
@@ -100,11 +100,6 @@ bool MainMenuScene::init()
 	this->addChild(sprite, 0);
 
 	//creating touch listener to wait for P key to be pressed
-	/*
-	auto touchListener = EventListenerTouchOneByOne::create();
-	touchListener->setSwallowTouches(true);
-	_eventDispatcher->addEventListenerWithSceneGraphPriority(touchListener, this);
-	*/
 	auto listener = EventListenerKeyboard::create();
 	listener->onKeyReleased = CC_CALLBACK_2(MainMenuScene::onKeyReleased, this);
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
@@ -134,7 +129,7 @@ bool MainMenuScene::setNumPlayers(std::string input)
 		// use converted
 		if (converted <= 0)
 		{
-			CCLog("invalid input, number was less than 0");
+			CCLog("invalid input, number of players cannot be zero or less");
 			return false;
 		}
 		else
@@ -145,26 +140,42 @@ bool MainMenuScene::setNumPlayers(std::string input)
 	}
 }
 
+void MainMenuScene::editBoxEditingDidBegin(EditBox * editBox)
+{
+}
+
+void MainMenuScene::editBoxEditingDidEnd(EditBox * editBox)
+{
+	if (!setNumPlayers(editBox->getText()))
+	{
+		CCLog("input incorrect, setting number of players to default.");
+		setNumPlayersToDefault();
+	}
+}
+
+void MainMenuScene::editBoxTextChanged(EditBox * editBox, std::string & text)
+{
+}
+
+void MainMenuScene::editBoxReturn(EditBox * editBox)
+{
+}
+
 void MainMenuScene::onKeyReleased(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event * event)
 {
 	if (keyCode == EventKeyboard::KeyCode::KEY_P)
 	{
 		//identical to calling startGame, but for some reason there is no way to put in the proper parameter at this point
+		//Pressing P will go into debug mode, so it will start the game with default parameters
+		setNumPlayersToDefault();
 		startGame(nullptr);
 	}
 }
 
 void MainMenuScene::startGame(cocos2d::Ref * pSender)
 {
-	if (setNumPlayers(_editPlayers->getText()))
-	{
 		auto scene = MapScene::createScene(numPlayers);
 		Director::getInstance()->replaceScene(scene);
-	}
-	else
-	{
-		CCLog("please input a proper value for numPlayers");
-	}
 }
 
 void MainMenuScene::setNumPlayersToDefault()

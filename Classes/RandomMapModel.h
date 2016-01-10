@@ -11,3 +11,4 @@ private:
 	void growIsland(int x, int y, int backdir);
 	bool deburr();
 };
+//TODO: look at this article http://www.redblobgames.com/articles/noise/introduction.html

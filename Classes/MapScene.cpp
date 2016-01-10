@@ -33,10 +33,11 @@ bool MapScene::init()
 	{
 		return false;
 	}
+	movementSpeed = 1;
 
 	Size visibleSize = Director::getInstance()->getVisibleSize();
-	//TODO: we are using this in all the Scenes, so make this into some sort of inline, DRY principle
 	Vec2 origin = Director::getInstance()->getVisibleOrigin();
+	//TODO: we are using this in all the Scenes, so make this into some sort of inline, DRY principle
 
 	this->mapModel = new TMXMapModel("base100x60.tmx");
 	this->_mapView = this->mapModel->getView();
@@ -80,6 +81,9 @@ bool MapScene::init()
 			auto tile = ground->getTileAt(Vec2(tileX, tileY));
 			selectSprite->setPosition(tile->getPosition());
 			selectSprite->setOpacity(0xff);
+			std::stringstream ss;
+			ss << tile->getPositionX() << "," << tile->getPositionY() << "]";
+			_hud->setLabel(ss.str());
 		}
 		else
 		{
@@ -109,7 +113,6 @@ void MapScene::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)
 	switch (keyCode)
 	{
 		case EventKeyboard::KeyCode::KEY_W:
-			//_hud->changeLabel("Stopped Moving up");
 			wDown = 0;
 			break;
 		case EventKeyboard::KeyCode::KEY_S:
@@ -135,23 +138,22 @@ void MapScene::onKeyPressed(EventKeyboard::KeyCode keyCode, Event * event)
 	switch (keyCode)
 	{
 		case EventKeyboard::KeyCode::KEY_W:
-			//_hud->changeLabel("Moving up");
-			wDown = 1;
+			wDown = movementSpeed;
 			break;
 		case EventKeyboard::KeyCode::KEY_S:
-			sDown = 1;
+			sDown = movementSpeed;
 			break;
 		case EventKeyboard::KeyCode::KEY_A:
-			aDown = 1;
+			aDown = movementSpeed;
 			break;
 		case EventKeyboard::KeyCode::KEY_D:
-			dDown = 1;
+			dDown = movementSpeed;
 			break;
 		case EventKeyboard::KeyCode::KEY_Q:
-			qDown = 1;
+			qDown = movementSpeed;
 			break;
 		case EventKeyboard::KeyCode::KEY_E:
-			eDown = 1;
+			eDown = movementSpeed;
 			break;
 		case EventKeyboard::KeyCode::KEY_T:
 			nextTurn();
@@ -164,7 +166,7 @@ void MapScene::update(float delta)
 	float dX = (dDown * -1.0) + (aDown * 1.0);
 	float dY = (wDown * -1.0) + (sDown * 1.0);
 	float dScale = (qDown * -0.005) + (eDown * 0.005);
-
+	//TODO:prevent user from zooming out at a range slightly larger than the size of the map
 	Vec2 newPos(this->_mapView->getPositionX() + dX, this->_mapView->getPositionY() + dY);
 
 	this->_mapView->setScale(_mapView->getScale() + dScale);
@@ -175,12 +177,12 @@ void MapScene::nextTurn()
 {
 	playerModule->nextTurn();
 	const char * id = playerModule->getCurrentPlayerID();
-	char message[100];
 	//with some math, pray that a player doesn't name himself with more than 78 characters (I hate constants)
 	//we should make a limit on the size of character names when asked, something reasonable
-	std::sprintf(message, "%s is now current player", id);
-	CCLog(message);
-	_hud->changeLabel(message);
+	std::stringstream ss;
+	ss << id << "is now current player.";
+	CCLog(ss.str().c_str());
+	_hud->setLabel(ss.str());
 }
 
 

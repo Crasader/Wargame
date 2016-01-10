@@ -8,7 +8,7 @@ public:
 
 	static cocos2d::Scene* createScene();
 	virtual bool init();
-	void changeLabel(std::string m);
+	void setLabel(std::string m);
 
 	CREATE_FUNC(HUDScene);
 
@@ -16,4 +16,5 @@ public:
 
 private:
 	cocos2d::CCLabelTTF* _messageLabel;
+	cocos2d::ui::EditBox * _editSpeed;
 }; 
