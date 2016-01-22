@@ -28,7 +28,7 @@ class PlayerModule
 		Player * getCurrentPlayer();
 
 		/*returns the name of the current player*/
-		const char * getCurrentPlayerID();
+		std::string getCurrentPlayerID();
 
 		/*given a specific unit, will show intel on it if it belongs to another player,
 		or will allow unit to be acted upon if it belongs to current player

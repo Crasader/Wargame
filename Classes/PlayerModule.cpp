@@ -39,9 +39,9 @@ Player * PlayerModule::getCurrentPlayer()
 	return *curr_player;
 }
 
-const char * PlayerModule::getCurrentPlayerID()
+std::string PlayerModule::getCurrentPlayerID()
 {
-	return (*curr_player)->getID().c_str();
+	return (*curr_player)->getID();
 }
 
 

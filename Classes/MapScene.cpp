@@ -24,7 +24,7 @@ Scene* MapScene::createScene(int numplayers)
 
 bool MapScene::init()
 {
-	this->qDown = 0;  this->wDown = 0; this->eDown = 0; 
+	this->qDown = 0;  this->wDown = 0; this->eDown = 0;
 	this->aDown = 0;  this->sDown = 0; this->dDown = 0;
 
 	//////////////////////////////
@@ -37,7 +37,6 @@ bool MapScene::init()
 
 	Size visibleSize = Director::getInstance()->getVisibleSize();
 	Vec2 origin = Director::getInstance()->getVisibleOrigin();
-	//TODO: we are using this in all the Scenes, so make this into some sort of inline, DRY principle
 
 	this->mapModel = new TMXMapModel("base100x60.tmx");
 	this->_mapView = this->mapModel->getView();
@@ -176,11 +175,9 @@ void MapScene::update(float delta)
 void MapScene::nextTurn()
 {
 	playerModule->nextTurn();
-	const char * id = playerModule->getCurrentPlayerID();
-	//with some math, pray that a player doesn't name himself with more than 78 characters (I hate constants)
-	//we should make a limit on the size of character names when asked, something reasonable
+	std::string id = playerModule->getCurrentPlayerID();
 	std::stringstream ss;
-	ss << id << "is now current player.";
+	ss << id << " is now current player.";
 	CCLog(ss.str().c_str());
 	_hud->setLabel(ss.str());
 }
