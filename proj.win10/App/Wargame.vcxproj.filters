@@ -43,11 +43,21 @@
     <ClCompile Include="..\..\Classes\RandomMapModel.cpp">
       <Filter>Classes</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Classes\Player.cpp" />
-    <ClCompile Include="..\..\Classes\PlayerModule.cpp" />
-    <ClCompile Include="..\..\Classes\TMXMapModel.cpp" />
-    <ClCompile Include="..\..\Classes\HUDScene.cpp" />
-    <ClCompile Include="..\..\Classes\MainMenuScene.cpp" />
+    <ClCompile Include="..\..\Classes\PlayerModule.cpp">
+      <Filter>Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Classes\TMXMapModel.cpp">
+      <Filter>Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Classes\Player.cpp">
+      <Filter>Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Classes\MainMenuScene.cpp">
+      <Filter>Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Classes\HUDScene.cpp">
+      <Filter>Classes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.xaml.h" />
@@ -74,11 +84,21 @@
     <ClInclude Include="..\..\Classes\RandomMapModel.h">
       <Filter>Classes</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Classes\Player.h" />
-    <ClInclude Include="..\..\Classes\PlayerModule.h" />
-    <ClInclude Include="..\..\Classes\TMXMapModel.h" />
-    <ClInclude Include="..\..\Classes\HUDScene.h" />
-    <ClInclude Include="..\..\Classes\MainMenuScene.h" />
+    <ClInclude Include="..\..\Classes\PlayerModule.h">
+      <Filter>Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Classes\TMXMapModel.h">
+      <Filter>Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Classes\Player.h">
+      <Filter>Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Classes\MainMenuScene.h">
+      <Filter>Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Classes\HUDScene.h">
+      <Filter>Classes</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest" />
