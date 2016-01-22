@@ -60,7 +60,8 @@ bool MapScene::init()
 
 	touchListener->onTouchBegan = [&](Touch* touch, Event* event)
 	{
-		auto tgt = (TMXTiledMap *)(event->getCurrentTarget());
+		auto scene = (MapScene *)(event->getCurrentTarget());
+		auto tgt = (TMXTiledMap *)(scene->_mapView);
 		auto ground = tgt->getLayer("Layer0");
 		auto mapDim = ground->getLayerSize();
 		auto mapBox = ground->getBoundingBox();
@@ -82,7 +83,16 @@ bool MapScene::init()
 			selectSprite->setPosition(tile->getPosition());
 			selectSprite->setOpacity(0xff);
 			std::stringstream ss;
-			ss << tile->getPositionX() << "," << tile->getPositionY() << "]";
+			ss << "[" << tile->getPositionX() << "," << tile->getPositionY() << "] ";
+			auto mapModel = scene->mapModel;
+			if (mapModel->getCellTypeAt(tileX, tileY) == MapModel::CellType::LAND)
+			{
+				ss << "Land";
+			}
+			else
+			{
+				ss << "Sea";
+			}
 			_hud->setLabel(ss.str());
 		}
 		else
@@ -93,7 +103,7 @@ bool MapScene::init()
 		return true;
 	};
 
-	_eventDispatcher->addEventListenerWithSceneGraphPriority(touchListener, this->_mapView);
+	_eventDispatcher->addEventListenerWithSceneGraphPriority(touchListener, this);
 
 	auto listener = EventListenerKeyboard::create();
 	listener->onKeyPressed = CC_CALLBACK_2(MapScene::onKeyPressed, this);
