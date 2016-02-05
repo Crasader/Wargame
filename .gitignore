@@ -5,3 +5,6 @@
 **/.vs/
 **/ipch/
 *.vcxproj.user
+*.tlog
+*.idb
+proj.win32/Debug.win32/libcocos2d.exp
